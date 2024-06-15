@@ -1,3 +1,7 @@
+
+"use client";
+import React from "react";
+import { Button } from "@/components/ui/moving-border";
 import Image from "next/image";
 import Link from 'next/link'
 import Article from '@/images/Article.png'
@@ -6,30 +10,53 @@ import Badge from '@/images/Profile Badges_ 2b31e583-03f4-47bd-b406-5eba2bf79072
 import Global from '@/images/Global Connecti 770a56d2-46ae-435d-abb7-3c33115e9ba8.png'
 import Skill from '@/images/Skill.png'
 import  connect from '@/images/Connect.png'
+import { BackgroundGradient } from "@/components/ui/background-gradient";
 
 export default function Widget() {
   return (
     <div>
    
    <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://m.economictimes.com/thumb/msid-92590513,width-1200,height-900,resizemode-4,imgsize-100510/productivity.jpg')" }}>
-        <nav className="absolute top-0 left-0 w-full flex justify-between items-center p-4 md:p-6 z-20">
-          <div className="text-white text-xl md:text-2xl font-bold">ConnectAll</div>
-          <div className="flex items-center space-x-4 md:space-x-6 text-white">
-          <Link href="/profile" className="hover:underline">Profile</Link>
-            <Link href="/search" className="hover:underline">Search</Link>
-            <Link href="/groups" className="hover:underline">Groups</Link>
-            <Link href="/projects" className="hover:underline">Projects</Link>
-            <Link href="/auth/register" className="bg-green-500 text-white px-3 py-1 md:px-4 md:py-2 rounded-full hover:bg-green-600">Join Now</Link>
-          </div>
-        </nav>
-        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col justify-center items-start p-4 md:p-6 space-y-4">
-          <h1 className="text-white text-4xl md:text-6xl font-bold leading-tight">
-            Connect.<br />Showcase.<br />Collaborate.<br />Succeed.
-          </h1>
-          <p className="text-white text-base md:text-lg">Integrate profiles, showcase skills, collaborate seamlessly, and grow together.</p>
-          <Link href="/login" className="bg-green-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-full hover:bg-green-600">Join Now</Link>
+      <nav className="fixed top-0 left-0 w-full flex justify-between items-center p-4 md:p-6 z-20 bg-black bg-opacity-50">
+        <div className="text-white text-xl md:text-2xl font-bold">ConnectAll</div>
+        <div className="flex items-center space-x-4 md:space-x-6 text-white">
+          
+        <Link href="/profile" className="relative inline-block px-2 py-1 hover:text-teal-400 transition-transform transform duration-200 hover:scale-105">Profile
+          </Link>
+          
+          <Link href="/search" className="hover:text-teal-400 transition-colors duration-200 hover:underline">Search
+          </Link>
+          
+          <Link href="/groups" className="hover:text-teal-400 transition-colors duration-200 hover:underline">Groups
+          </Link>
+         
+          <Link href="/projects" className="hover:text-teal-400 transition-colors duration-200 hover:underline">Projects
+          </Link>
+          <Button
+            borderRadius="1.5rem"
+            className="border-neutral-200 dark:border-slate-800 transform transition-transform duration-300 hover:scale-95 px-3 py-1"
+          >
+            
+            <Link href="/login" className="text-white rounded-full">Join Now
+            </Link>
+          </Button>
         </div>
+      </nav>
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col justify-center items-start p-4 md:p-6 space-y-4">
+        <h1 className="text-white text-4xl md:text-6xl font-bold leading-tight">
+          Connect.<br />Showcase.<br />Collaborate.<br />Succeed.
+        </h1>
+        <p className="text-white text-base md:text-lg">Integrate profiles, showcase skills, collaborate seamlessly, and grow together.</p>
+        <Button
+          borderRadius="1.75rem"
+          className="dark:bg-slate-900 border-neutral-200 dark:border-slate-800 transform transition-transform duration-300 hover:scale-95"
+        >
+         
+         <Link href="/login" className="text-white px-4 py-2 md:px-6 md:py-3 rounded-full">Join Now
+          </Link>
+        </Button>
       </div>
+    </div>
 
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
@@ -46,7 +73,7 @@ export default function Widget() {
             </div>
           </div>
           <div className="md:w-1/2">
-            <img src="https://t3.ftcdn.net/jpg/05/58/79/54/360_F_558795469_pvzp1H4yYhRSqo6hdhD00GzQMt2Vhian.jpg" alt="Hands together on a table" width={600} height={400} className="rounded-lg shadow-lg" />
+            <img src="https://t3.ftcdn.net/jpg/05/58/79/54/360_F_558795469_pvzp1H4yYhRSqo6hdhD00GzQMt2Vhian.jpg" alt="Hands together on a table" width={600} height={400} className="rounded-lg shadow-lg border-4 border-spacing-48  border-black" />
           </div>
         </div>
       </div>
@@ -56,7 +83,7 @@ export default function Widget() {
         <img
           src="https://st3.depositphotos.com/4282501/18282/i/450/depositphotos_182825916-stock-photo-skill-concept-chart-with-keywords.jpg"
           alt="Person with magnifying glass"
-          className="w-full h-auto rounded-lg shadow-lg"
+          className="w-full h-auto rounded-lg shadow-lg border-4 border-spacing-48  border-black"
         />
       </div>
       <div className="md:w-1/2 mt-6 md:mt-0 md:ml-6 text-center md:text-left">
@@ -87,78 +114,89 @@ export default function Widget() {
             </div>
           </div>
           <div className="md:w-1/2 p-6">
-            <img src="https://www.freshbooks.com/wp-content/uploads/2021/11/Why-is-collaboration-important.jpg" alt="Collaboration Image" className="rounded-lg shadow-lg"/>
+            <img src="https://www.freshbooks.com/wp-content/uploads/2021/11/Why-is-collaboration-important.jpg" alt="Collaboration Image" className="rounded-lg shadow-lg border-4 border-spacing-48  border-black"/>
           </div>
         </div>
      
         <div className="bg-zinc-900 text-white p-8">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-0">Boost Your Professional Network</h2>
-              <p className="text-lg md:text-xl text-zinc-300">Showcase projects and skills to the community, fostering recognition and valuable networking.</p>
+              <h2   className="mt-20 md:mt-0 text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 mb-4 md:mb-0">Boost Your Professional Network</h2>
+              <p className="mt-4 font-medium text-base md:text-l text-neutral-300 max-w-lg mx-auto">Showcase projects and skills to the community, fostering recognition and valuable networking.</p>
             </div>
             <div className="bg-zinc-900 p-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="relative">
+            <BackgroundGradient className="rounded-lg max-w-2xl p-3 dark:bg-zinc-900 bg-cover bg-center">
             <Image
             src={connect}
             alt="Person with magnifying glass"
-            width={600}
+            width={700}
             height={400}
-            className="w-full h-auto rounded-lg shadow-lg"
+            className="w-full h-auto rounded-2xl shadow-2xl object-contain border-4 border-spacing-48  border-black "
+
           />
+          </BackgroundGradient>
             </div>
             <div className="relative">
+            <BackgroundGradient className="rounded-lg max-w-2xl p-3 dark:bg-zinc-900 ">
             <Image
             src={communicate}
             alt="Person with magnifying glass"
             width={600}
             height={400}
-            className="w-full h-auto rounded-lg shadow-lg"
+            className="w-full h-auto rounded-lg shadow-lg bg-cover bg-center border-4   border-black"
           />
+           </BackgroundGradient>
             </div>
             <div className="relative">
+            <BackgroundGradient className="rounded-lg max-w-2xl p-3 dark:bg-zinc-900 ">
             <Image
             src={Article}
             alt="Person with magnifying glass"
             width={900}
             height={600}
-            className="w-full h-auto rounded-lg shadow-lg"
+            className="w-full h-auto rounded-2xl shadow-2xl object-contain border-4 border-spacing-48  border-black"
           />
+          </BackgroundGradient>
               
              
             </div>
             <div className="relative">
+            <BackgroundGradient className="rounded-lg max-w-2xl p-3 dark:bg-zinc-900 ">
             <Image
             src={Skill}
-            
             alt="Person with magnifying glass"
             width={900}
             height={600}
-            className="w-full h-auto rounded-lg shadow-lg"
-            
+            className="w-full h-auto rounded-2xl shadow-2xl object-contain border-4 border-spacing-48  border-black"
           />
+          </BackgroundGradient>
               
             </div>
             <div className="relative">
+            <BackgroundGradient className="rounded-lg max-w-2xl p-3 dark:bg-zinc-900 ">
             <Image
             src={Badge}
             alt="Person with magnifying glass"
             width={900}
             height={600}
-            className="w-full h-auto rounded-lg shadow-lg"
+            className="w-full h-auto rounded-2xl shadow-2xl object-contain border-4 border-spacing-48  border-black"
           />
+          </BackgroundGradient>
           
               
             </div>
             <div className="relative">
+            <BackgroundGradient className="rounded-lg max-w-2xl p-3 dark:bg-zinc-900 ">
             <Image
             src={Global}
             alt="Person with magnifying glass"
-            width={600}
-            height={400}
-            className="w-full h-auto rounded-lg shadow-lg"
+            width={900}
+            height={600}
+            className="w-full h-auto rounded-2xl shadow-2xl object-contain border-4 border-spacing-48  border-black"
           />
+          </BackgroundGradient>
             </div>
           </div>
         </div>
@@ -171,9 +209,12 @@ export default function Widget() {
           <p className="mt-2 text-zinc-600 dark:text-zinc-300">
             Connect, Collaborate, Grow Together
           </p>
-          <Link href="/login">
-          <button className="mt-4 bg-green-500 text-white py-2 px-4 rounded-lg">Join Now</button>
-          </Link>
+          <Button
+        borderRadius="1.75rem"
+        className=" dark:bg-slate-900  border-neutral-200 dark:border-slate-800 transform transition-transform duration-300 hover:scale-95"
+      >
+          <Link href="/login" className="text-white px-1 py-1 md:px-1 md:py-1 rounded-full  ">Join Now</Link>
+          </Button>
         </div>
         <div>
           <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Company</h3>
