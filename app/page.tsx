@@ -5,6 +5,7 @@ import communicate from '@/images/Communicate.png'
 import Badge from '@/images/Profile Badges_ 2b31e583-03f4-47bd-b406-5eba2bf79072.png'
 import Global from '@/images/Global Connecti 770a56d2-46ae-435d-abb7-3c33115e9ba8.png'
 import Skill from '@/images/Skill.png'
+import  connect from '@/images/Connect.png'
 
 export default function Widget() {
   return (
@@ -100,7 +101,7 @@ export default function Widget() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="relative">
             <Image
-            src={communicate}
+            src={connect}
             alt="Person with magnifying glass"
             width={600}
             height={400}
