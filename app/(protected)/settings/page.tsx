@@ -36,7 +36,6 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 
-
 const SettingsPage = () => {
   const user = useCurrentUser();
 
@@ -52,7 +51,17 @@ const SettingsPage = () => {
       newPassword: undefined,
       name: user?.name || undefined,
       email: user?.email || undefined,
-     
+      primarySkill: user?.primarySkill || undefined,
+      secondarySkills: user?.secondarySkills || [],
+      dob: user?.dob || undefined,
+      country: user?.country || undefined,
+      location: user?.location || undefined,
+      post: user?.post || undefined,
+      projects: user?.projects || [],
+      friends: user?.friends || [],
+      institution: user?.institution || undefined,
+      study: user?.study || undefined,
+      profilePic: user?.profilePic || undefined,
       isTwoFactorEnabled: user?.isTwoFactorEnabled || undefined,
     }
   });
@@ -74,7 +83,7 @@ const SettingsPage = () => {
     });
   }
 
-  return ( 
+  return (
     <Card className="w-[600px]">
       <CardHeader>
         <p className="text-2xl font-semibold text-center">
@@ -163,9 +172,195 @@ const SettingsPage = () => {
                   />
                 </>
               )}
-            
+              <FormField
+                control={form.control}
+                name="primarySkill"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Primary Skill</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Primary Skill"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="secondarySkills"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Secondary Skills</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Secondary Skills"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="dob"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Date of Birth</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="YYYY-MM-DD"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="country"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Country</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Country"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Location</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Location"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="post"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Post</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Post"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="projects"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Projects</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Projects"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="friends"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Friends</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Friends"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="institution"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Institution</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Institution"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="study"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Field of Study</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Field of Study"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="profilePic"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Profile Picture URL</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Profile Picture URL"
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               {user?.isOAuth === false && (
-                <FormField
+                   <FormField
                   control={form.control}
                   name="isTwoFactorEnabled"
                   render={({ field }) => (
@@ -200,7 +395,7 @@ const SettingsPage = () => {
         </Form>
       </CardContent>
     </Card>
-   );
+  );
 }
- 
+
 export default SettingsPage;

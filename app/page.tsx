@@ -37,7 +37,7 @@ export default function Widget() {
             className="border-neutral-200 dark:border-slate-800 transform transition-transform duration-300 hover:scale-95 px-3 py-1"
           >
             
-            <Link href="/login" className="text-white rounded-full">Join Now
+            <Link href="/auth/register" className="text-white rounded-full">Join Now
             </Link>
           </Button>
         </div>
@@ -49,10 +49,11 @@ export default function Widget() {
         <p className="text-white text-base md:text-lg">Integrate profiles, showcase skills, collaborate seamlessly, and grow together.</p>
         <Button
           borderRadius="1.75rem"
-          className="dark:bg-slate-900 border-neutral-200 dark:border-slate-800 transform transition-transform duration-300 hover:scale-95"
+          className="dark:bg-slate-900 border-neutral-200 dark:border-slate-800 tra
+          nsform transition-transform duration-300 hover:scale-95"
         >
          
-         <Link href="/login" className="text-white px-4 py-2 md:px-6 md:py-3 rounded-full">Join Now
+         <Link href="/auth/register" className="text-white px-4 py-2 md:px-6 md:py-3 rounded-full">Join Now
           </Link>
         </Button>
       </div>
@@ -213,7 +214,7 @@ export default function Widget() {
         borderRadius="1.75rem"
         className=" dark:bg-slate-900  border-neutral-200 dark:border-slate-800 transform transition-transform duration-300 hover:scale-95"
       >
-          <Link href="/login" className="text-white px-1 py-1 md:px-1 md:py-1 rounded-full  ">Join Now</Link>
+          <Link href="/auth/register" className="text-white px-1 py-1 md:px-1 md:py-1 rounded-full  ">Join Now</Link>
           </Button>
         </div>
         <div>
