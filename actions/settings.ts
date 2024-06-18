@@ -57,32 +57,36 @@ export const settings = async (
     values.newPassword = undefined;
   }
 
+  const updateData: any = {
+    name: values.name,
+    email: values.email,
+    password: values.password,
+    primarySkill: values.primarySkill,
+    secondarySkills: values.secondarySkills,
+    country: values.country,
+    location: values.location,
+    projects: values.projects,
+    institution: values.institution,
+    study: values.study,
+    profilePic: values.profilePic,
+    emailVerified: dbUser.emailVerified,  // Preserve the emailVerified status
+  };
+
+  if (values.posts) {
+    updateData.posts = {
+      connect: values.posts.map(postId => ({ id: postId })),
+    };
+  }
+
   const updatedUser = await db.user.update({
     where: { id: dbUser.id },
-    data: {
-      name: values.name,
-      email: values.email,
-      password: values.password,
-      primarySkill: values.primarySkill,
-      secondarySkills: values.secondarySkills,
-      dob: values.dob,
-      country: values.country,
-      location: values.location,
-      post: values.post,
-      projects: values.projects,
-      
-      institution: values.institution,
-      study: values.study,
-      profilePic: values.profilePic,
-     
-    },
+    data: updateData,
   });
 
   update({
     user: {
       name: updatedUser.name,
       email: updatedUser.email,
-     
     }
   });
 

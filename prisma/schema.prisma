@@ -1,64 +1,112 @@
 // prisma/schema.prisma
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
 }
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 model User {
-  id                String    @id @default(auto()) @map("_id") @db.ObjectId
-  name              String?
-  email             String?   @unique
-  password          String?
-  primarySkill      String?   
-  secondarySkills   String?
-  dob               String?   
-  country           String?   
-  location          String?   
-  post              String?   
-  projects          String?
-  institution       String?   
-  study             String?   
-  profilePic        String?   
-  accounts          Account[] @relation("UserAccounts")
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  email           String?   @unique
+  emailVerified   DateTime? // Add this field
+  password        String?
+  primarySkill    String?
+  secondarySkills String[]  @default([])
+  birthday        DateTime?
+  country         String?
+  location        String?
+  posts           Post[]
+  projects        String[]  @default([])
+  institution     String?
+  study           String?
+  profilePic      String?
+  accounts        Account[] @relation("UserAccounts")
+  Comment         Comment[]
+  Reply           Reply[]
+}
+
+model Post {
+    id       String    @id @default(auto()) @map("_id") @db.ObjectId
+    title    String
+    content  String
+    markdown String? // Field to store markdown content
+    images   String[] // Field to store image URLs
+    videos   String[] // Field to store video URLs
+    userId   String    @db.ObjectId
+    user     User      @relation(fields: [userId], references: [id])
+    Comment  Comment[]
 }
 
 model Account {
-  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String  @db.ObjectId
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?
-  access_token       String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?
-  session_state      String?
+    id                String  @id @default(auto()) @map("_id") @db.ObjectId
+    userId            String  @db.ObjectId
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String?
+    access_token      String?
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String?
+    session_state     String?
 
-  user User @relation(fields: [userId], references: [id], name: "UserAccounts")
+    user User @relation(fields: [userId], references: [id], name: "UserAccounts")
 
-  @@unique([provider, providerAccountId])
+    @@unique([provider, providerAccountId])
 }
 
 model VerificationToken {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  email   String
-  token   String   @unique
-  expires DateTime
+    id      String   @id @default(auto()) @map("_id") @db.ObjectId
+    email   String
+    token   String   @unique
+    expires DateTime
 
-  @@unique([email, token])
+    @@unique([email, token])
 }
 
 model PasswordResetToken {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  email   String
-  token   String   @unique
-  expires DateTime
+    id      String   @id @default(auto()) @map("_id") @db.ObjectId
+    email   String
+    token   String   @unique
+    expires DateTime
 
-  @@unique([email, token])
+    @@unique([email, token])
+}
+
+model Comment {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    postId    String   @db.ObjectId // Reference to the associated post
+    userId    String   @db.ObjectId // Reference to the user who made the comment
+    content   String // Content of the comment
+    likes     Int      @default(0) // Number of likes
+    dislikes  Int      @default(0) // Number of dislikes
+    createdAt DateTime @default(now()) // Timestamp for comment creation
+    updatedAt DateTime @updatedAt // Timestamp for comment update
+    replies   Reply[] // Relation to replies
+
+    // Relation to User
+    user User @relation(fields: [userId], references: [id])
+    // Relation to Post
+    post Post @relation(fields: [postId], references: [id])
+}
+
+model Reply {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    commentId String   @db.ObjectId // Reference to the parent comment
+    userId    String   @db.ObjectId // Reference to the user who made the reply
+    content   String // Content of the reply
+    likes     Int      @default(0) // Number of likes
+    dislikes  Int      @default(0) // Number of dislikes
+    createdAt DateTime @default(now()) // Timestamp for reply creation
+    updatedAt DateTime @updatedAt // Timestamp for reply update
+
+    // Relation to User
+    user    User    @relation(fields: [userId], references: [id])
+    // Relation to Comment
+    comment Comment @relation(fields: [commentId], references: [id])
 }
