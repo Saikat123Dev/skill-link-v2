@@ -1,7 +1,5 @@
 // SettingsPage.tsx
 "use client"
-// SettingsPage.tsx
-
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -79,42 +77,95 @@ const SettingsPage = () => {
   };
 
   return (
-    <Card className="w-[600px]">
-      <CardHeader>
-        <p className="text-2xl font-semibold text-center">⚙️ Settings</p>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="space-y-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="John Doe" disabled={isPending} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {!user?.isOAuth && (
-                <>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <Card className="w-[600px]">
+        <CardHeader>
+          <p className="text-2xl font-semibold text-center">⚙️ Settings</p>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
-                    name="email"
+                    name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel>Name</FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            placeholder="john.doe@example.com"
-                            type="email"
-                            disabled={isPending}
-                          />
+                          <Input {...field} placeholder="John Doe" disabled={isPending} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  {!user?.isOAuth && (
+                    <>
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                              <Input
+                                {...field}
+                                placeholder="john.doe@example.com"
+                                type="email"
+                                disabled={isPending}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Password</FormLabel>
+                            <FormControl>
+                              <Input
+                                {...field}
+                                placeholder="******"
+                                type="password"
+                                disabled={isPending}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="newPassword"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>New Password</FormLabel>
+                            <FormControl>
+                              <Input
+                                {...field}
+                                placeholder="******"
+                                type="password"
+                                disabled={isPending}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </>
+                  )}
+                  <FormField
+                    control={form.control}
+                    name="primarySkill"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Primary Skill</FormLabel>
+                        <FormControl>
+                          <Input {...field} type="text" placeholder="Primary Skill" disabled={isPending} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -122,17 +173,12 @@ const SettingsPage = () => {
                   />
                   <FormField
                     control={form.control}
-                    name="password"
+                    name="secondarySkills"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>Secondary Skills (comma-separated)</FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            placeholder="******"
-                            type="password"
-                            disabled={isPending}
-                          />
+                          <Input {...field} type="text" placeholder="Secondary Skills" disabled={isPending} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -140,125 +186,83 @@ const SettingsPage = () => {
                   />
                   <FormField
                     control={form.control}
-                    name="newPassword"
+                    name="country"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>New Password</FormLabel>
+                        <FormLabel>Country</FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            placeholder="******"
-                            type="password"
-                            disabled={isPending}
-                          />
+                          <Input {...field} placeholder="Country" disabled={isPending} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                </>
-              )}
-              <FormField
-                control={form.control}
-                name="primarySkill"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Primary Skill</FormLabel>
-                    <FormControl>
-                      <Input {...field} type="text" placeholder="Primary Skill" disabled={isPending} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="secondarySkills"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Secondary Skills (comma-separated)</FormLabel>
-                    <FormControl>
-                      <Input {...field} type="text" placeholder="Secondary Skills" disabled={isPending} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="country"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Country</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Country" disabled={isPending} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="location"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Location</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Location" disabled={isPending} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="institution"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Institution</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Institution" disabled={isPending} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="study"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Field of Study</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Field of Study" disabled={isPending} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="profilePic"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Profile Picture URL</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Profile Picture URL" disabled={isPending} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <FormError message={error} />
-            <FormSuccess message={success} />
-            <Button disabled={isPending} type="submit">
-              Save
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+                  <FormField
+                    control={form.control}
+                    name="location"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Location</FormLabel>
+                        <FormControl>
+                          <Input {...field} placeholder="Location" disabled={isPending} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="institution"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Institution</FormLabel>
+                        <FormControl>
+                          <Input {...field} placeholder="Institution" disabled={isPending} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="study"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Field of Study</FormLabel>
+                        <FormControl>
+                          <Input {...field} placeholder="Field of Study" disabled={isPending} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="profilePic"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Profile Picture URL</FormLabel>
+                        <FormControl>
+                          <Input {...field} placeholder="Profile Picture URL" disabled={isPending} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
+              <FormError message={error} />
+              <FormSuccess message={success} />
+              <div className="flex justify-end">
+                <Button disabled={isPending} type="submit">
+                  Save
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+const UserGender = z.enum(["male", "female", "others"]);
+
 export const SettingsSchema = z
   .object({
     name: z.string().optional(),
@@ -13,7 +15,7 @@ export const SettingsSchema = z
       .min(6, { message: "Minimum of 6 characters required for new password" })
       .optional(),
     primarySkill: z.string().optional(),
-    secondarySkills: z.string().optional(),
+    secondarySkills: z.array(z.string()).optional(),
     country: z.string().optional(),
     location: z.string().optional(),
     posts: z.array(z.string()).optional(),
@@ -23,6 +25,8 @@ export const SettingsSchema = z
     institution: z.string().optional(),
     study: z.string().optional(),
     profilePic: z.string().url({ message: "Invalid URL format" }).optional(),
+    gender: UserGender.optional(),
+    birthday: z.string().optional(),
   })
   .refine(
     (data) => {
@@ -72,28 +76,27 @@ export const LoginSchema = z.object({
 });
 
 export const RegisterSchema = z.object({
-  email: z.string().email({
-    message: "Email is required",
-  }),
-  password: z.string().min(6, {
-    message: "Minimum 6 characters required",
-  }),
-  name: z.string().min(1, {
-    message: "Name is required",
-  }),
-  birthday: z.string() || z.date(),
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  birthday: z.string().refine((val) => {
+    const date = new Date(val);
+    return !isNaN(date.getTime());
+  }, "Invalid date format"),
+ 
 });
 
 export const PostSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(1, { message: "Title is required" }),
-  content: z.string().min(1, { message: "Content is required" }),
-  markdown: z.string().optional(),
+  content: z.string().optional(),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().optional(),
+  authorId: z.string().min(1, { message: "User ID is required" }),
   images: z
     .array(z.string().url({ message: "Invalid image URL format" }))
     .optional(),
   videos: z
     .array(z.string().url({ message: "Invalid video URL format" }))
     .optional(),
-  userId: z.string().min(1, { message: "User ID is required" }),
 });
