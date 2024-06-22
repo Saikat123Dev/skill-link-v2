@@ -83,20 +83,12 @@ export const RegisterSchema = z.object({
     const date = new Date(val);
     return !isNaN(date.getTime());
   }, "Invalid date format"),
- 
+
 });
 
 export const PostSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(1, { message: "Title is required" }),
-  content: z.string().optional(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
+  content: z.any(),
   authorId: z.string().min(1, { message: "User ID is required" }),
-  images: z
-    .array(z.string().url({ message: "Invalid image URL format" }))
-    .optional(),
-  videos: z
-    .array(z.string().url({ message: "Invalid video URL format" }))
-    .optional(),
 });
