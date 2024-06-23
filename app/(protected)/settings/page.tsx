@@ -95,14 +95,14 @@ const SettingsPage = () => {
     <div className="flex flex-col items-center justify-center min-h-screen w-full bg-gray-700">
       <div className=" w-full min-h-full p-6 bg-blue-950 rounded-lg ">
         <header className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Setting</h1>
+          <h1 className="text-2xl text-white font-bold">Setting</h1>
           
         </header>
-        <Card className="border bg-gray-800 shadow-lg rounded-lg ">
+        <Card className="border mt-6 bg-gray-800 shadow-lg rounded-lg ">
           
           <div className="ml-6 mr-6 flex space-x-6">
             <nav className="flex mt-7 flex-col w-1/4 space-y-4">
-            <div className="relative">
+            <div className="relative w-full">
             <UserPage/>
           </div>
               <button className="p-2 text-left text-white bg-blue-500 rounded-lg">
@@ -392,27 +392,7 @@ const SettingsPage = () => {
                             </FormItem>
                           )}
                         />
-                        <FormField
-                          control={form.control}
-                          name="profilePic"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-white">
-                                Profile Picture URL
-                              </FormLabel>
-                              <FormControl>
-                                <Input
-                                  {...field}
-                                  type="text"
-                                  placeholder="Profile Picture URL"
-                                  disabled={isPending}
-                                  className="input-field"
-                                />
-                              </FormControl>
-                              <FormMessage className="text-red-500" />
-                            </FormItem>
-                          )}
-                        />
+                      
                       </div>
                     </div>
                     <FormError message={error} />

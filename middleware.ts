@@ -10,15 +10,16 @@ import {
 
 const { auth } = NextAuth(authConfig);
 
-export default auth((req) => {
+export default auth((req):any => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+    const isUploadRoute = nextUrl.pathname.startsWith('/api/uploadthing');
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
-
-  if (isApiAuthRoute) {
+   
+  if (isApiAuthRoute || isUploadRoute) {
     return null;
   }
 
@@ -50,3 +51,5 @@ export default auth((req) => {
 export const config = {
   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 }
+
+

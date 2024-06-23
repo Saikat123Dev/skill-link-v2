@@ -1,4 +1,7 @@
 import type { Config } from "tailwindcss"
+
+import { withUt } from "uploadthing/tw";
+ 
 const defaultTheme = require("tailwindcss/defaultTheme");
 const svgToDataUri = require("mini-svg-data-uri");
 const colors = require("tailwindcss/colors");
@@ -81,6 +84,9 @@ const config = {
   
     },
   },
+  withUt:({
+     content: ["./src/**/*.{ts,tsx,mdx}"],
+  }),
   plugins: [
     require("tailwindcss-animate"),
     addVariablesForColors,
@@ -119,6 +125,9 @@ function addVariablesForColors({ addBase, theme }: any) {
   addBase({
     ":root": newVars,
   });
+  
 }
+
+
 
 export default config

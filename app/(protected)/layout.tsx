@@ -9,7 +9,7 @@ interface ProtectedLayoutProps {
 const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
   return ( 
     <div className="flex min-h-screen">
-      <Sidebar className="w-64">
+      <Sidebar>
         <SidebarItem 
           itemKey="home"
           icon={<Home size={20} />}
@@ -50,6 +50,7 @@ const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
           icon={<Settings size={20} />}
           text="Settings"
           href="/settings"
+          alert
         />
       </Sidebar>
       <div className="flex flex-col w-full">

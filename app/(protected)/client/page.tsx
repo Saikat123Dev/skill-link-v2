@@ -8,7 +8,7 @@ const UserPage = () => {
 
   return ( 
     <UserInfo
-      label="📱 Client component"
+    
       user={user}
     />
    );
