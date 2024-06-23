@@ -14,8 +14,8 @@ export const SettingsSchema = z
       .string()
       .min(6, { message: "Minimum of 6 characters required for new password" })
       .optional(),
-    primarySkill: z.string().optional(),
-    secondarySkills: z.array(z.string()).optional(),
+    primarySkill:z.string().optional(),
+    secondarySkills:z.string().optional(),
     country: z.string().optional(),
     location: z.string().optional(),
     posts: z.array(z.string()).optional(),

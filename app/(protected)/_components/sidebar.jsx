@@ -17,15 +17,15 @@ export default function Sidebar({ children }) {
 
   return (
     <aside
-      className={`h-screen bg-gray-50 shadow-md transition-all duration-300 ${
+      className={`min-h-screen bg-gray-900 shadow-md transition-all duration-300 ${
         expanded ? "w-64" : "w-20"
       }`}
     >
-      <nav className="h-full flex flex-col bg-white border-r border-gray-200">
+      <nav className="min-h-full flex flex-col bg-gray-800 border-r border-gray-700">
         {/* Sidebar Header */}
-        <div className="p-4 flex justify-between items-center border-b border-gray-200">
+        <div className="p-4 flex justify-between items-center border-b border-gray-700">
           <span
-            className={`text-xl font-bold text-gray-800 transition-opacity duration-300 ${
+            className={`text-xl font-bold text-gray-200 transition-opacity duration-300 ${
               expanded ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -33,7 +33,7 @@ export default function Sidebar({ children }) {
           </span>
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+            className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition-colors"
           >
             {expanded ? <ChevronFirst size={20} /> : <ChevronLast size={20} />}
           </button>
@@ -45,8 +45,10 @@ export default function Sidebar({ children }) {
           <ul className="flex-1 px-3 py-2 space-y-2">{children}</ul>
         </SidebarContext.Provider>
 
-        <div className="border-t border-gray-200 p-4 flex items-center">
-          <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+        <div className="border-t border-gray-700 p-4 flex items-center">
+          <div className="w-10 h-10 bg-gray-600 rounded-full">
+            <UserButton />
+          </div>
           <div
             className={`flex items-center ml-3 overflow-hidden transition-all duration-300 ${
               expanded ? "w-auto" : "w-0"
@@ -57,13 +59,13 @@ export default function Sidebar({ children }) {
                 expanded ? "opacity-100" : "opacity-0"
               }`}
             >
-              <span className="text-xs text-gray-600">
+              <span className="text-xs text-gray-400">
                 {/* Placeholder for user information */}
-                <UserButton />
+                
               </span>
             </div>
             {expanded && (
-              <MoreVertical size={20} className="ml-auto text-gray-400" />
+              <MoreVertical size={20} className="ml-auto text-gray-500" />
             )}
           </div>
         </div>
@@ -94,8 +96,8 @@ export function SidebarItem({ icon, text, alert, href, itemKey }) {
     <li
       className={`relative flex items-center py-2 px-3 my-1 rounded-md cursor-pointer transition-colors group ${
         isActive
-          ? "bg-indigo-100 text-indigo-800"
-          : "text-gray-600 hover:bg-gray-100"
+          ? "bg-indigo-700 text-white"
+          : "text-gray-300 hover:bg-gray-700 hover:text-white"
       }`}
       onClick={() => handleItemClick(itemKey)}
     >

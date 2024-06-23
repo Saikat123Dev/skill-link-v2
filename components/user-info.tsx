@@ -1,9 +1,5 @@
 import { ExtendedUser } from "@/next-auth";
-import { 
-  Card, 
-  CardContent, 
-  CardHeader
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 interface UserInfoProps {
@@ -11,62 +7,22 @@ interface UserInfoProps {
   label: string;
 };
 
-export const UserInfo = ({
-  user,
-  label,
-}: UserInfoProps) => {
+export const UserInfo = ({ user, label }: UserInfoProps) => {
   return (
-    <Card className="w-[600px] shadow-md">
-      <CardHeader>
-        <p className="text-2xl font-semibold text-center">
-          {label}
+   
+     
+      <CardContent className="flex flex-col items-center space-y-4">
+        <div className="rounded-full overflow-hidden border-4 border-white">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbgk0yfCOe55931lf6q0osfhGRU-fnH8Im1g&s"
+            alt={user?.name}
+            className="w-24 h-24 rounded-full"
+          />
+        </div>
+        <p className="text-lg font-semibold">
+          {user?.name}
         </p>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-          <p className="text-sm font-medium">
-            ID
-          </p>
-          <p className="truncate text-xs max-w-[180px] font-mono p-1 bg-slate-100 rounded-md">
-            {user?.id}
-          </p>
-        </div>
-        <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-          <p className="text-sm font-medium">
-            Name
-          </p>
-          <p className="truncate text-xs max-w-[180px] font-mono p-1 bg-slate-100 rounded-md">
-            {user?.name}
-          </p>
-        </div>
-        <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-          <p className="text-sm font-medium">
-            Email
-          </p>
-          <p className="truncate text-xs max-w-[180px] font-mono p-1 bg-slate-100 rounded-md">
-            {user?.email}
-          </p>
-        </div>
-        <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-          <p className="text-sm font-medium">
-            Role
-          </p>
-          <p className="truncate text-xs max-w-[180px] font-mono p-1 bg-slate-100 rounded-md">
-            {user?.role}
-          </p>
-        </div>
-
-        <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
-          <p className="text-sm font-medium">
-            Two Factor Authentication
-          </p>
-          <Badge 
-            variant={user?.isTwoFactorEnabled ? "success" : "destructive"}
-          >
-            {user?.isTwoFactorEnabled ? "ON" : "OFF"}
-          </Badge>
-        </div>
       </CardContent>
-    </Card>
-  )
-}
+  
+  );
+};
