@@ -4,6 +4,7 @@ import { Icons } from "@/components/icons"; // Adjust path if necessary
 import { UploadButton } from "@uploadthing/react";
 import type { ExtendedUser } from "@/next-auth"; // Adjust path and import type if necessary
 import { Pencil } from "lucide-react";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 // Interface for UserInfoProps
 interface UserInfoProps {
@@ -33,6 +34,7 @@ const updateProfilePic = async (url: string): Promise<void> => {
 
 export const UserInfo = ({ user }: UserInfoProps) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const fetchImageUrl = async () => {
@@ -77,8 +79,8 @@ export const UserInfo = ({ user }: UserInfoProps) => {
             </button>
           </div>
         ) : (
-          <div className="h-full w-full bg-blue-300 flex items-center justify-center rounded-full">
-            <Icons.user className="h-12 w-12 text-gray-600" />
+          <div className="h-full w-full bg-pink-300 flex items-center justify-center rounded-full text-[100px]">
+            {currentUser?.name[0]}
           </div>
         )}
       </div>
