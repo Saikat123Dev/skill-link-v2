@@ -1,22 +1,48 @@
 "use client"
 import { useState, useEffect } from "react";
-
 import { Icons } from "@/components/icons"; // Adjust path if necessary
 import { UploadButton } from "@uploadthing/react";
 import type { ExtendedUser } from "@/next-auth"; // Adjust path and import type if necessary
 import { Pencil } from "lucide-react";
 
-
+// Interface for UserInfoProps
 interface UserInfoProps {
   user?: ExtendedUser;
 }
 
+// Function to get the current profile picture from the backend
+const fetchProfilePic = async (): Promise<string | null> => {
+  const response = await fetch("/api/upload");
+  if (response.ok) {
+    const data = await response.json();
+    return data.profilePic;
+  }
+  return null;
+};
+
+// Function to update the profile picture on the backend
+const updateProfilePic = async (url: string): Promise<void> => {
+  await fetch("/api/upload", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ profilePic: url }),
+  });
+};
+
 export const UserInfo = ({ user }: UserInfoProps) => {
-  
-  
-  const [imageUrl, setImageUrl] = useState<string | null>(
-    () => localStorage.getItem("userImageUrl") || user?.image || null
-  );
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchImageUrl = async () => {
+      const url = await fetchProfilePic();
+      setImageUrl(url || user?.image || null);
+    };
+
+    fetchImageUrl();
+  }, [user]);
+
   // Update localStorage whenever imageUrl changes
   useEffect(() => {
     if (imageUrl) {
@@ -28,7 +54,8 @@ export const UserInfo = ({ user }: UserInfoProps) => {
 
   const handleImageReset = () => {
     setImageUrl(null);
-    
+    // Optionally, you can also update the backend to remove the profile picture
+    updateProfilePic("");
   };
 
   return (
@@ -56,10 +83,12 @@ export const UserInfo = ({ user }: UserInfoProps) => {
         )}
       </div>
       {!imageUrl && (
-        <UploadButton<string | null, string>
+        <UploadButton<string|null, string>
           endpoint="imageUploader" // Replace with your actual endpoint URL
-          onClientUploadComplete={(res) => {
-            setImageUrl(res[0].url);
+          onClientUploadComplete={async (res) => {
+            const newUrl = res[0].url;
+            setImageUrl(newUrl);
+            await updateProfilePic(newUrl);
             console.log("Files: ", res);
             alert("Upload Completed");
           }}
