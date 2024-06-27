@@ -5,7 +5,7 @@ import { currentUser } from "@/lib/auth";
 import { SettingsSchema } from "@/schemas";
 import { getUserByEmail, getUserById } from "@/data/user";
 
-// Define a schema for the profile picture update
+// Define a schema for the prcofile piture update
 const ProfilePicSchema = z.object({
   profilePic: z.string().url(),
 });

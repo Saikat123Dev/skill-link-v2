@@ -3,7 +3,7 @@
 import * as z from "zod";
 import bcrypt from "bcryptjs";
 
-import { update } from "@/auth";
+import { unstable_update } from "@/auth";
 import { db } from "@/lib/db";
 import { SettingsSchema } from "@/schemas";
 import { getUserByEmail, getUserById } from "@/data/user";
@@ -65,6 +65,7 @@ export const settings = async (
     secondarySkills: values.secondarySkills,
     country: values.country,
     location: values.location,
+    about:values.about,
     projects: values.projects,
     institution: values.institution,
     study: values.study,
@@ -83,7 +84,7 @@ export const settings = async (
     data: updateData,
   });
 
-  update({
+  unstable_update({
     user: {
       name: updatedUser.name,
       email: updatedUser.email,

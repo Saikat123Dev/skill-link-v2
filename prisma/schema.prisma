@@ -25,6 +25,7 @@ model User {
   secondarySkills String[]      @default([])
   birthday        DateTime?
   country         String?
+  about           String?
   location        String?
   posts           Post[]
   projects        String[]      @default([])

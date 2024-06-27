@@ -19,6 +19,7 @@ export const SettingsSchema = z
     country: z.string().optional(),
     location: z.string().optional(),
     posts: z.array(z.string()).optional(),
+    about:z.string(),
     projects: z
       .array(z.string().url({ message: "Invalid URL format" }))
       .optional(),

@@ -392,6 +392,27 @@ const SettingsPage = () => {
                             </FormItem>
                           )}
                         />
+                          <FormField
+                          control={form.control}
+                          name="about"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-white">
+                                About
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  {...field}
+                                  type="text"
+                                  placeholder="Tell about yourself"
+                                  disabled={isPending}
+                                  className="input-field"
+                                />
+                              </FormControl>
+                              <FormMessage className="text-red-500" />
+                            </FormItem>
+                          )}
+                        />
                       
                       </div>
                     </div>
