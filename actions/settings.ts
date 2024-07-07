@@ -25,7 +25,7 @@ export const settings = async (
   if (!dbUser) {
     return { error: "Unauthorized" };
   }
-
+  console.log(user.isOAuth)
   if (user.isOAuth) {
     values.email = undefined;
     values.password = undefined;
