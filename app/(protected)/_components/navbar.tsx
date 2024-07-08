@@ -25,7 +25,13 @@ export const Navbar = () => {
         <SearchBar/>
         
         {/* Use your UserButton component here */}
-        <UserButton />
+        <div className="flex items-center justify-center gap-10">
+        
+         <Button className="border-neutral-200 dark:border-slate-800 transform transition-transform duration-300 hover:scale-95 px-3 py-1">
+              <Link href="/posts" className="text-white rounded-full font-bold">Create Post</Link>
+            </Button>
+<UserButton />
+            </div>
       </div>
     </nav>
   );

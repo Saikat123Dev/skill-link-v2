@@ -1,5 +1,3 @@
-"use client";
-
 import EditorJS from "@editorjs/editorjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
@@ -17,38 +15,19 @@ import "@/styles/editor.css";
 
 type FormData = z.infer<typeof PostValidator>;
 
-interface EditorProps {
-  subredditId: string;
-}
 
-// Assuming generateReactHelpers is correctly imported and configured
 
-// Example function to handle file upload
 async function handleFileUpload(files: any) {
   try {
-    // Replace 'imageUploader' with your actual endpoint key
     const endpoint = "imageUploader";
-
-    // Example: Additional input parameters specific to your endpoint
-    const inputParams = {
-      // Provide any necessary input data here, if required by your endpoint
-    };
-
-    // Perform file upload
     const uploadedFiles = await uploadFiles(endpoint, {
       files,
-      ...inputParams,
-      // Optionally, you can add headers or other options here
     });
-
     console.log("Uploaded files:", uploadedFiles);
-
-    // Handle success scenario here
     return {
       success: 1,
       files: uploadedFiles.map((file) => ({
         url: file.url,
-        // Add any additional metadata you need
       })),
     };
   } catch (error) {
@@ -60,7 +39,7 @@ async function handleFileUpload(files: any) {
   }
 }
 
-export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
+export const Editor = () => {
   const {
     register,
     handleSubmit,
@@ -72,6 +51,7 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
       content: null,
     },
   });
+
   const ref = useRef<EditorJS>();
   const _titleRef = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
@@ -90,7 +70,7 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
     const LinkTool = (await import("@editorjs/link")).default;
     const InlineCode = (await import("@editorjs/inline-code")).default;
     const ImageTool = (await import("@editorjs/image")).default;
-
+  
     if (!ref.current) {
       const editor = new EditorJS({
         holder: "editor",
@@ -101,7 +81,13 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
         inlineToolbar: true,
         data: { blocks: [] },
         tools: {
-          header: Header,
+          header: {
+            class: Header as any,
+            config: {
+              placeholder: "Enter a header",
+              levels: [1, 2, 3, 4], // Enable all header levels
+            },
+          },
           embed: Embed,
           table: Table,
           list: List,
@@ -118,20 +104,14 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
               uploader: {
                 async uploadByFile(file: any) {
                   try {
-                    // Replace 'imageUploader' with your actual endpoint key
                     const endpoint = "imageUploader";
-
-                    // Perform file upload
                     const res = await uploadFiles(endpoint, {
                       files: [file],
-                      // Add any additional options here
                     });
-
-                    // Handle success scenario here
                     return {
                       success: 1,
                       file: {
-                        url: res[0].url, // Assuming single file upload
+                        url: res[0].url,
                       },
                     };
                   } catch (error) {
@@ -148,24 +128,7 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
           inlineCode: InlineCode,
         },
       });
-    }
-  }, []);
-
-  useEffect(() => {
-    if (Object.keys(errors).length) {
-      for (const [_key, value] of Object.entries(errors)) {
-        toast({
-          title: "Something went wrong.",
-          description: (value as { message: string }).message,
-          variant: "destructive",
-        });
-      }
-    }
-  }, [errors]);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsMounted(true);
+      ref.current = editor;
     }
   }, []);
 
@@ -185,6 +148,24 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
       };
     }
   }, [isMounted, initializeEditor]);
+
+  useEffect(() => {
+    if (Object.keys(errors).length) {
+      for (const [_key, value] of Object.entries(errors)) {
+        toast({
+          title: "Something went wrong.",
+          description: (value as { message: string }).message,
+          variant: "destructive",
+        });
+      }
+    }
+  }, [errors]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsMounted(true);
+    }
+  }, []);
 
   async function savePost(data: FormData) {
     setIsLoading(true);
@@ -226,9 +207,8 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
   }
 
   const { ref: titleRef, ...rest } = register("title");
-
-  return (
-    <div className="w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200">
+return (
+   <div className="w-[900px]  h-full p-4 bg-white rounded-lg border border-zinc-900 shadow-lg ">
       <form
         id="subreddit-post-form"
         className="w-fit"
@@ -243,9 +223,9 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
             }}
             {...rest}
             placeholder="Title"
-            className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
+            className="w-full resize-none appearance-none overflow-scroll bg-transparent text-5xl font-bold focus:outline-none "
           />
-          <div id="editor" className="min-h-[500px]" />
+          <div id="editor" className=" pl-9 min-h-[500px] text-black" />
           <p className="text-sm text-gray-500">
             Use{" "}
             <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
@@ -259,11 +239,11 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
         <div className="flex justify-end mt-4">
           <button
             type="button"
-            className="mr-2 px-4 py-2 bg-blue-500 text-white rounded"
+            className="mr-2 px-4 py-2 bg-neon-blue text-black rounded-lg shadow-lg transition-transform transform hover:scale-105"
             onClick={handleSubmit(savePost)}
             disabled={isLoading}
           >
-            Save
+            Post
           </button>
         </div>
       </form>

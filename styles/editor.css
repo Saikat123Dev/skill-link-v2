@@ -63,3 +63,10 @@
 .codex-editor__redactor {
     padding-bottom: 0 !important;
 }
+/* editor.css */
+#editor {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+   
+    overflow: auto;
+}

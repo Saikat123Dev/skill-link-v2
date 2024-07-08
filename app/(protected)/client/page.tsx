@@ -3,7 +3,7 @@
 
 
 
-import { Editor } from "@/components/Editor";
+
 import { UserInfo } from "@/components/user-info";
 import { useCurrentUser } from "@/hooks/use-current-user";
 
@@ -16,7 +16,8 @@ const UserPage = () => {
 
         user={user}
       />
-<Editor subredditId={""}/>
+
+
     </div>
   );
 }
