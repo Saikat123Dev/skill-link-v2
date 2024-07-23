@@ -53,9 +53,9 @@ const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
           alert
         />
       </Sidebar>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col flex-grow w-full overflow-auto">
         <Navbar />
-        <div className="flex-grow flex items-center justify-center">
+        <div className="flex-grow p-4">
           {children}
         </div>
       </div>
