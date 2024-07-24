@@ -1,12 +1,11 @@
-"use client"; // Indicates usage in a client-side environment (typically for Next.js).
+"use client"; 
 
-// Importing necessary modules and components
 import React from "react";
-import { Button } from "@/components/ui/moving-border"; // Custom Button component
-import Image from "next/image"; // Next.js Image component
+import { Button } from "@/components/ui/moving-border"; 
+import Image from "next/image"; 
 import { SparklesCore } from "@/components/ui/sparkles";
-import Link from 'next/link'; // Next.js Link component for client-side navigation
-import Article from '@/images/Article.png'; // Image import
+import Link from 'next/link'; 
+import Article from '@/images/Article.png'; 
 import communicate from '@/images/Communicate.png'; // Image import
 import Badge from '@/images/Profile Badges_ 2b31e583-03f4-47bd-b406-5eba2bf79072.png'; // Image import
 import Global from '@/images/Global Connecti 770a56d2-46ae-435d-abb7-3c33115e9ba8.png'; // Image import

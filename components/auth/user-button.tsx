@@ -16,10 +16,12 @@ import {
 } from "@/components/ui/avatar";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
+import Link from "next/link";
 
 export const UserButton = () => {
   const user = useCurrentUser();
-
+  const userId = user?.id;
+  console.log(userId)
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -35,7 +37,9 @@ export const UserButton = () => {
         <div>
           <DropdownMenuItem>
             <FaUser className="h-4 w-4 mr-2" />
-            Profile
+           <Link href={`http://localhost:3000/my_profile/${userId}`}>
+           Profile
+           </Link>
           </DropdownMenuItem>
         </div>
         
