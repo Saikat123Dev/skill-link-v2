@@ -20,13 +20,14 @@ export async function POST(req: Request) {
         }
 
      
-        const { title, content } = await req.json();
+        const { title, content,slug } = await req.json();
 
-      
+      console.log(title)
         const newPost = await db.post.create({
             data: {
                 title: title,
                 content: content,
+                slug,
                 author: {
                     connect: { id: dbUser.id },
                 },

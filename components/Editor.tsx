@@ -7,7 +7,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { z } from "zod";
 
 import { toast } from "@/hooks/use-toast";
-import { uploadFiles } from "@/utils/uploadthing";
+ import { uploadFiles}  from "@/utils/uploadthing";
 import { PostCreationRequest, PostValidator } from "@/lib/post";
 import axios from "axios";
 
@@ -15,15 +15,13 @@ import "@/styles/editor.css";
 
 type FormData = z.infer<typeof PostValidator>;
 
-
-
 async function handleFileUpload(files: any) {
   try {
     const endpoint = "imageUploader";
     const uploadedFiles = await uploadFiles(endpoint, {
       files,
     });
-    console.log("Uploaded files:", uploadedFiles);
+    console.log("Uploaded files:", uploadFiles);
     return {
       success: 1,
       files: uploadedFiles.map((file) => ({
@@ -48,6 +46,7 @@ export const Editor = () => {
     resolver: zodResolver(PostValidator),
     defaultValues: {
       title: "",
+      slug: "",
       content: null,
     },
   });
@@ -85,7 +84,7 @@ export const Editor = () => {
             class: Header as any,
             config: {
               placeholder: "Enter a header",
-              levels: [1, 2, 3, 4], // Enable all header levels
+              levels: [1, 2, 3, 4],
             },
           },
           embed: Embed,
@@ -170,10 +169,13 @@ export const Editor = () => {
   async function savePost(data: FormData) {
     setIsLoading(true);
     setError(null);
+    console.log(data.slug)
     try {
+      
       const blocks = await ref.current?.save();
       const payload: PostCreationRequest = {
         title: data.title,
+        slug: data.slug,
         content: blocks,
       };
       const { data: responseData } = await axios.post(
@@ -207,8 +209,9 @@ export const Editor = () => {
   }
 
   const { ref: titleRef, ...rest } = register("title");
-return (
-   <div className="w-[900px]  h-full p-4 bg-white rounded-lg border border-zinc-900 shadow-lg ">
+ 
+  return (
+    <div className="w-[900px] h-full p-4 bg-white rounded-lg border border-zinc-900 shadow-lg">
       <form
         id="subreddit-post-form"
         className="w-fit"
@@ -223,9 +226,14 @@ return (
             }}
             {...rest}
             placeholder="Title"
-            className="w-full resize-none appearance-none overflow-scroll bg-transparent text-5xl font-bold focus:outline-none "
+            className="w-full resize-none appearance-none overflow-scroll bg-transparent text-5xl font-bold focus:outline-none"
           />
-          <div id="editor" className=" pl-9 min-h-[500px] text-black" />
+          <input
+            {...register("slug")}
+            placeholder="Enter slug"
+            className="w-full mt-2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <div id="editor" className="pl-9 min-h-[500px] text-black" />
           <p className="text-sm text-gray-500">
             Use{" "}
             <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
