@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@/components/auth/user-button";
-import SearchBar from "@/components/ui/search-bar";
+import SearchBar from "../search/components/search-bar";
 
 export const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
