@@ -1,11 +1,11 @@
-"use client"; // Indicates usage in a client-side environment (typically for Next.js).
+"use client"; 
 
-// Importing necessary modules and components
 import React from "react";
-import { Button } from "@/components/ui/moving-border"; // Custom Button component
-import Image from "next/image"; // Next.js Image component
-import Link from 'next/link'; // Next.js Link component for client-side navigation
-import Article from '@/images/Article.png'; // Image import
+import { Button } from "@/components/ui/moving-border"; 
+import Image from "next/image"; 
+import { SparklesCore } from "@/components/ui/sparkles";
+import Link from 'next/link'; 
+import Article from '@/images/Article.png'; 
 import communicate from '@/images/Communicate.png'; // Image import
 import Badge from '@/images/Profile Badges_ 2b31e583-03f4-47bd-b406-5eba2bf79072.png'; // Image import 
 import Global from '@/images/Global Connecti 770a56d2-46ae-435d-abb7-3c33115e9ba8.png'; // Image import
@@ -14,10 +14,11 @@ import connect from '@/images/Connect.png'; // Image import
 import { BackgroundGradient } from "@/components/ui/background-gradient"; // Custom background gradient component
 import './page.css'; // Importing custom CSS styles for the page
 import { GlobeDemo } from "@/components/globeGithub";
+import { SparklesPreview } from "@/components/sparkleBackground";
 
 export default function Widget() {
   return (
-    <div>
+    <div className="min-h-full">
       {/* Header section */}
       <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://img.freepik.com/free-photo/artistic-blurry-colorful-wallpaper-background_58702-8632.jpg')" }}>
         {/* Navigation bar */}
@@ -37,34 +38,11 @@ export default function Widget() {
         </nav>
         {/* Hero section */}
 
-        <div className="relative flex flex-col md:flex-row justify-between items-center w-full h-full">
-          <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col justify-center items-start p-4 md:p-6 space-y-4 z-10">
-            <h1 className="text-white text-4xl md:text-6xl font-bold leading-tight">
-              Connect.<br />Showcase.<br />Collaborate.<br />Succeed.
-            </h1>
-            <p className="text-white text-base md:text-lg">
-              Integrate profiles, showcase skills, collaborate seamlessly, and grow together.
-            </p>
-            <Button
-              borderRadius="1.75rem"
-              className="dark:bg-slate-900 border-neutral-200 dark:border-slate-800 transform transition-transform duration-300 hover:scale-95"
-            >
-              <Link href="/auth/register" className="text-white px-4 py-2 md:px-6 md:py-3 rounded-full font-bold">
-                Join Now
-              </Link>
-            </Button>
-          </div>
-          <div className="relative w-full h-full">
-            <div className="absolute right-1 flex items-center h-full">
-              <GlobeDemo />
-            </div>
-          </div>
-        </div>
-
-
+        <SparklesPreview />
 
         {/* Main content */}
-        <div className="container mx-auto px-4 py-8">
+        <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: "url('https://img.freepik.com/free-photo/artistic-blurry-colorful-wallpaper-background_58702-8632.jpg')" }}>
+        <div className="container mx-auto px-4 py-40">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-white">
               Seamless Integration, Comprehensive Profiles, Endless Opportunities
@@ -101,6 +79,7 @@ export default function Widget() {
               />
             </div>
           </div>
+        </div>
         </div>
 
         {/* Feature section */}
@@ -165,44 +144,47 @@ export default function Widget() {
           backgroundImage: "url('https://img.freepik.com/free-photo/artistic-blurry-colorful-wallpaper-background_58702-8632.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          height: "655px",
+          height: "850px",
           width: "100%",
         }}>
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-              <h2 className="mt-20 md:mt-0 text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 mb-4 md:mb-0">Boost Your Professional Network</h2>
-              <p className="mt-4 font-medium text-base md:text-l text-neutral-300 max-w-lg mx-auto">Showcase projects and skills to the community, fostering recognition and valuable networking.</p>
+          <div className=" mx-auto min-h-screen p-8">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-16">
+              <h2 className="mt-20 md:mt-0 text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 mb-8 md:mb-0">
+                Boost Your Professional Network
+              </h2>
+              <p className="mt-4 font-medium text-base md:text-lg text-neutral-300 max-w-lg mx-auto">
+                Showcase projects and skills to the community, fostering recognition and valuable networking.
+              </p>
             </div>
-            <div className=" p-4">
-              {/* Grid of images */}
+            <div className="p-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9">
                 {/* Individual image components */}
                 <div className="relative">
                   {/* Background gradient wrapper */}
-                  <BackgroundGradient className="rounded-lg max-w-2xl p-1 dark:bg-zinc-900 bg-cover bg-center">
+                  <BackgroundGradient className="rounded-lg max-w-2xl p-1 dark:bg-zinc-900 bg-cover bg-center shadow-lg">
                     <Image
                       src={connect}
                       alt="Person with magnifying glass"
                       width={700}
-                      height={400}
-                      className="w-full h-auto rounded-3xl shadow-2xl object-contain border-4 border-spacing-48 border-black"
+                      height={200}
+                      className="w-full  rounded-3xl shadow-2xl object-contain border-4 border-spacing-48 border-black"
                     />
                   </BackgroundGradient>
                 </div>
                 {/* Repeat similar blocks for other images */}
                 <div className="relative">
-                  <BackgroundGradient className="rounded-lg max-w-2xl p-1 dark:bg-zinc-900">
+                  <BackgroundGradient className="rounded-lg max-w-2xl p-1 dark:bg-zinc-900 bg-cover bg-center shadow-lg">
                     <Image
                       src={communicate}
                       alt="Person with magnifying glass"
                       width={600}
                       height={400}
-                      className="w-full h-auto rounded-3xl shadow-lg bg-cover bg-center border-4 border-black"
+                      className="w-full h-auto rounded-3xl shadow-lg object-contain border-4 border-black"
                     />
                   </BackgroundGradient>
                 </div>
                 <div className="relative">
-                  <BackgroundGradient className="rounded-lg max-w-2xl p-1 dark:bg-zinc-900">
+                  <BackgroundGradient className="rounded-lg max-w-2xl p-1 dark:bg-zinc-900 bg-cover bg-center shadow-lg">
                     <Image
                       src={Article}
                       alt="Person with magnifying glass"
@@ -212,14 +194,14 @@ export default function Widget() {
                     />
                   </BackgroundGradient>
                 </div>
-                {/* Additional images skipped for brevity */}
+                
               </div>
             </div>
           </div>
         </div>
 
         {/* Footer section */}
-        <div className="bg-white dark:bg-zinc-800 py-7 px-4" style={{
+        <div className="bg-white dark:bg-zinc-800   py-9 px-4" style={{
           backgroundImage: "url('https://img.freepik.com/free-photo/artistic-blurry-colorful-wallpaper-background_58702-8632.jpg')",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
@@ -330,5 +312,6 @@ export default function Widget() {
         </div>
       </div>
     </div>
+
   );
 }

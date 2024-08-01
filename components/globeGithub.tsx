@@ -395,7 +395,7 @@ export function GlobeDemo() {
   ];
 
   return (
-    <div className="flex items-center justify-center h-screen w-full">
+    <div className="flex items-center justify-center  w-full">
       <div className=" relative w-[700px] h-[700px] overflow-hidden">
         <motion.div
           initial={{
@@ -414,7 +414,7 @@ export function GlobeDemo() {
 
         </motion.div>
 
-        <div className="absolute w-full h-full z-10">
+        <div className="absolute w-full h-full z-50">
           <World data={sampleArcs} globeConfig={globeConfig} />;
         </div>
       </div>

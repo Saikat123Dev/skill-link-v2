@@ -87,9 +87,10 @@ export const RegisterSchema = z.object({
 
 });
 
-export const PostSchema = z.object({
-  id: z.string().optional(),
-  title: z.string().min(1, { message: "Title is required" }),
+
+
+export const postPatchSchema = z.object({
+  title: z.string().min(3).max(128),
+  slug: z.string().min(3).max(128).optional(),
   content: z.any(),
-  authorId: z.string().min(1, { message: "User ID is required" }),
-});
+})
