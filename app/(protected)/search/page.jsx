@@ -5,6 +5,7 @@ import Data from '@/utils/SearchData/data.json';
 import Link from 'next/link';
 import ScrollToTop from '../my_profile/[userId]/components/helper/scroll-to-top';
 import { useSearchParams } from 'next/navigation';
+import ScrollReveal from 'scrollreveal';
 
 function Page() {
   const [data, setData] = useState([]);
@@ -36,12 +37,22 @@ function Page() {
     setFilteredData(filtered);
   }, [searchParams, data]);
 
+  useEffect(() => {
+    ScrollReveal().reveal('.reveal', {
+      duration: 1000,
+      distance: '50px',
+      easing: 'ease-in-out',
+      origin: 'bottom',
+      reset: true,
+    });
+  }, [filteredData]); // Reinitialize ScrollReveal when filteredData changes
+
   return (
     <>
       <p>ygygqygygs</p>
-      <h2 className="text-2xl font-bold mb-4 text-blue-600">SearchList</h2>
+      <h2 className="text-2xl font-bold mb-4 text-blue-600 reveal">SearchList</h2>
 
-      <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+      <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md reveal">
         <thead>
           <tr className="bg-gray-200 text-gray-700">
             <th className="border border-gray-300 p-2">Stream</th>
@@ -55,7 +66,7 @@ function Page() {
         </thead>
         <tbody>
           {filteredData.map((item, index) => (
-            <tr key={index} className="hover:bg-gray-100 transition duration-200 ease-in-out">
+            <tr key={index} className="hover:bg-gray-100 transition duration-200 ease-in-out reveal">
               <td className="border border-gray-300 p-4 text-center bg-white text-gray-800">{item.stream}</td>
               <td className="border border-gray-300 p-4 text-center bg-white text-gray-800">{item.username}</td>
               <td className="border border-gray-300 p-4 text-center bg-white text-gray-800">{item.primarySkillset}</td>
