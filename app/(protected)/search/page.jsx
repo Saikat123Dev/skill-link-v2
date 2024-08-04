@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Data from '@/utils/SearchData/data.json';
@@ -23,20 +23,22 @@ function Page() {
     let filtered = data;
 
     if (query) {
-      filtered = filtered.filter(item => {
-        if (filter && filter !== '') {
-          return item[filter].toLowerCase().includes(query.toLowerCase());
-        } else {
-          return Object.values(item).some(value => 
-            value.toString().toLowerCase().includes(query.toLowerCase())
-          );
-        }
-      });
+      if (filter && filter !== '') {
+        filtered = filtered.filter(item =>
+          item[filter] && item[filter].toLowerCase().includes(query.toLowerCase())
+        );
+      } else {
+        // If no filter is applied, search by username
+        filtered = filtered.filter(item =>
+          item.username && item.username.toLowerCase().includes(query.toLowerCase())
+        );
+      }
     }
 
     setFilteredData(filtered);
   }, [searchParams, data]);
 
+  // Uncomment and adjust ScrollReveal as needed
   useEffect(() => {
     ScrollReveal().reveal('.reveal', {
       duration: 1000,
@@ -45,7 +47,7 @@ function Page() {
       origin: 'bottom',
       reset: true,
     });
-  }, [filteredData]); // Reinitialize ScrollReveal when filteredData changes
+  }, [filteredData]);
 
   return (
     <>
