@@ -7,7 +7,7 @@ import { SparklesCore } from "@/components/ui/sparkles";
 import Link from 'next/link'; 
 import Article from '@/images/Article.png'; 
 import communicate from '@/images/Communicate.png'; // Image import
-import Badge from '@/images/Profile Badges_ 2b31e583-03f4-47bd-b406-5eba2bf79072.png'; // Image import
+import Badge from '@/images/Profile Badges_ 2b31e583-03f4-47bd-b406-5eba2bf79072.png'; // Image import 
 import Global from '@/images/Global Connecti 770a56d2-46ae-435d-abb7-3c33115e9ba8.png'; // Image import
 import Skill from '@/images/Skill.png'; // Image import
 import connect from '@/images/Connect.png'; // Image import
