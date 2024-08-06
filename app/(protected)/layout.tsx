@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "./_components/navbar";
 import Sidebar, { SidebarItem } from "./_components/sidebar";
 import { LayoutDashboard, Home, StickyNote, Layers, Flag, Calendar, LifeBuoy, Settings } from "lucide-react";
@@ -55,6 +56,7 @@ const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
       </Sidebar>
       <div className="flex flex-col flex-grow w-full overflow-auto">
         <Navbar />
+        <Toaster />
         <div className="flex-grow p-4">
           {children}
         </div>
